@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        *{
+            padding: 0;
+            margin: 0;
+        }
+
+    </style>
+</head>
+<body>
+<div class="container"></div>
+    <script>
+        var container;
+        window.onload = function () {
+            var bodyWidth = window.innerWidth + "px",
+                bodyHeight = window.innerHeight + "px";
+            container = document.getElementsByClassName('container');
+            console.log(container[0]);
+            container[0].style.width = bodyWidth;
+            container[0].style.height = bodyHeight;
+            container[0].style.backgroundColor = '#1d9073';
+        }
+    </script>
+</body>
+</html>
