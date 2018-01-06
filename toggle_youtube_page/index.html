@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>demo youtube</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        body{
+            width: 1280px;
+            margin: 0 auto;
+        }
+
+        #nav-container{
+            overflow: hidden;
+        }
+
+        #nav-menu{
+            background: url("./img/1.jpg");
+            width: 57px;
+            height: 48px;
+            float: left;
+            background-size: contain;
+        }
+
+        #nav-wrap{
+            background: url("./img/2.jpg");
+            width: 1216px;
+            height: 48px;
+            float: right;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #content{
+            background: url("./img/3.jpg");
+            width: 1280px;
+            height: 676px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        #nav-menu-hidden{
+            background: url("./img/4.jpg");
+            position: absolute;
+            top: 48px;
+            left: 0;
+            z-index: 10;
+            box-shadow: 1px 1px 1px 1px #c8c8c8;
+            width: 231px;
+            height: 676px;
+            background-size: cover;
+            background-repeat: no-repeat;
+        }
+
+        .clicked{
+            visibility: hidden;
+        }
+    </style>
+    <script src="../public/js/jquery-3.2.1.js"></script>
+    <script>
+        $(document).ready(function(){
+            $('#nav-menu').click(function(){
+                // alert('경고창');
+                // 메뉴 토글
+                $('#nav-menu-hidden').toggleClass('clicked');
+            });
+        });
+    </script>
+</head>
+<body>
+<div id="nav-container">
+    <div id="nav-menu"></div>
+    <div id="nav-wrap"></div>
+</div>
+<div id="content"></div>
+<div id="nav-menu-hidden" class=""></div>
+    <script>
+        // var container;
+        // window.onload = function () {
+        //     var bodyWidth = window.innerWidth + "px",
+        //         bodyHeight = window.innerHeight + "px";
+        //     container = document.getElementsByClassName('container');
+        //     console.log(container[0]);
+        //     container[0].style.width = bodyWidth;
+        //     container[0].style.height = bodyHeight;
+        //     container[0].style.backgroundColor = '#1d9073';
+        // }
+    </script>
+</body>
+</html>
