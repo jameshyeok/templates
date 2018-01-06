@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        img{
+            margin: 0;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        .viewport {
+            margin: 0 auto;
+            float: left;
+        }
+
+    </style>
+    <script src="../public/js/jquery-3.2.1.js"></script>
+    <script>
+        $(document).ready(function () {
+            var length = $(".viewport").length - 1,
+                width = 980,
+                height = 380;
+
+            $(".viewport").css({
+                width: width,
+                height: height,
+                overflow: "hidden"
+            });
+
+            $(".viewport ul").css({
+                width: width * length
+            });
+
+            $(".viewport li").css({
+                width: width,
+                height: height,
+                float: "left"
+            });
+
+            $("#bg-slider-nav").css({
+               width: 14 * length,
+               height: 14
+            });
+            var moveTo = function (index) {
+                // 매개변수 보완
+                index = index || 0;
+                index = index % length;
+
+
+                $(".viewport ul").animate({
+                    marginLeft: -width * index
+                });
+
+                // 타이틀 변경
+                // jQuery 객체로 바꾸기 위해 $()로 다시 묶었
+                var title = $($(".viewport li").get(index)).attr("data-title");
+                $("h1").html(title);
+                $("h2").html("0" + (index + 1));
+                currentIndex = index;
+                $("div[data-index]").css({
+                    backgroundPosition: "-40px 0"
+                });
+                $("div[data-index="+index+"]").css({
+                    backgroundPosition: "-60px 0"
+                });
+            }
+
+            for (var i = 0; i < length; i++) {
+                (function (i) {
+                    $("body").css("background", "#f1f0f0");
+                    $("<div></div>")
+                        .css({
+                            backgroundImage: "url(img/bg.slider-nav.png)",
+                            width: 12,
+                            height: 12,
+                            backgroundPosition: "-40px 0",
+                            float: "left",
+                            marginRight: 5
+                        })
+                        .attr("data-index", i)
+                        .click(function () {
+                        moveTo(i);
+                    }).appendTo("#bg-slider-nav");
+                })(i);
+
+            }
+
+            var currentIndex = 0;
+            setInterval(function(){
+                currentIndex += 1;
+                moveTo(currentIndex);
+            }, 1000 * 3);
+
+            // 초기화면에 타이틀 표시를 위함
+            moveTo(0);
+            window.moveSlider = moveTo;
+        });
+        </script>
+</head>
+<body>
+<!--<h2 id="index-lable"></h2>-->
+<!--<h1 id="title-lable"></h1>-->
+<!-- 이미지 소스 -->
+<img src="img/1.jpg" height="30" width="1280"/>
+<img src="img/2.jpg" height="73" width="1280"/>
+<img src="img/3.jpg" height="22" width="1280"/>
+<!--<img src="img/4.jpg" height="439" width="1280"/>-->
+<div class="viewport">
+    <ul>
+        <li data-title="가나다" class="viewport"><a href=""><img src="img/a.jpg" alt=""></a></li>
+        <li data-title="라마바" class="viewport"><a href=""><img src="img/b.jpg" alt=""></a></li>
+        <li data-title="사아자" class="viewport"><a href=""><img src="img/c.jpg" alt=""></a></li>
+        <li data-title="차카타" class="viewport"><a href=""><img src="img/d.jpg" alt=""></a></li>
+        <li data-title="파하차" class="viewport"><a href=""><img src="img/e.jpg" alt=""></a></li>
+    </ul>
+</div>
+<div id="bg-slider-nav"></div>
+<img src="img/5.jpg" height="1061" width="1280"/>
+</body>
+</html>
