@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../public/js/jquery-3.2.1.js"></script>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        div.img-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        div.img1 {
+            background: url("images/sec01_bg.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        div.img2 {
+            background: url("images/tab_business_bg.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        div.dot-nav-container {
+            position: fixed;
+            top: 50%;
+            right: 5%;
+        }
+
+        div.dot-nav-container ul,
+        div.dot-nav-container li {
+            display: block;
+        }
+
+        div.dot-nav-container a.dot-nav {
+            display: block;
+            width: 14px;
+            height: 14px;
+            margin-bottom: 12px;
+            background: url("images/m_dot_nav.png") no-repeat left top;
+        }
+
+        div.dot-nav-container a.dot-nav:hover,
+        div.dot-nav-container a.dot-nav .selected {
+            background-position: left bottom;
+        }
+
+    </style>
+    <script>
+      /**
+       * This is information of monitor width and height to be used for development
+       * width: 1280px
+       * height: 726px
+       **/
+      $(document).ready(function() {
+        $('.dot-nav-container ul li a').click(function() {
+          const scrollPosition = $($(this).attr('data-target')).offset().top;
+
+          $('html,body').stop().animate({
+            scrollTop: scrollPosition
+          }, 500);
+
+        });
+
+        $(".dot-nav").each(function () {
+          // 개별적으로 Wheel 이벤트 적용
+          $(this).on("mousewheel DOMMouseScroll", function (e) {
+            e.preventDefault();
+            var delta = 0;
+            if (!event) event = window.event;
+            if (event.wheelDelta) {
+              delta = event.wheelDelta / 120;
+              if (window.opera) delta = -delta;
+            } else if (event.detail) delta = -event.detail / 3;
+            var moveTop = null;
+            // 마우스휠을 위에서 아래로
+            if (delta < 0) {
+              if ($(this).next() != undefined) {
+                moveTop = $(this).next().offset().top;
+              }
+              // 마우스휠을 아래에서 위로
+            } else {
+              if ($(this).prev() != undefined) {
+                moveTop = $(this).prev().offset().top;
+              }
+            }
+            // 화면 이동 0.8초(800)
+            $("html,body").stop().animate({
+              scrollTop: moveTop + 'px'
+            }, {
+              duration: 800, complete: function () {
+              }
+            });
+          });
+        });
+
+      });
+    </script>
+</head>
+<body>
+<!-- 배경 -->
+<div class="img-container img1" id="img_1"></div>
+<div class="img-container img2" id="img_2"></div>
+<div class="img-container img1" id="img_3"></div>
+<div class="img-container img2" id="img_4"></div>
+<div class="img-container img1" id="img_5"></div>
+<!-- 우측 사이드 네비게이션 -->
+<div class="dot-nav-container">
+    <ul>
+        <li><a class="dot-nav" data-target="#img_1"></a></li>
+        <li><a class="dot-nav" data-target="#img_2"></a></li>
+        <li><a class="dot-nav" data-target="#img_3"></a></li>
+        <li><a class="dot-nav" data-target="#img_4"></a></li>
+        <li><a class="dot-nav" data-target="#img_5"></a></li>
+    </ul>
+</div>
+</body>
+</html>
