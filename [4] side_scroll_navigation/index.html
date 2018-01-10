@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="../public/js/jquery-3.2.1.js"></script>
+    <style>
+
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            list-style: none;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        div.img-container {
+            width: 100%;
+            height: 100%;
+        }
+
+        div.img1 {
+            background: url("images/sec01_bg.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        div.img2 {
+            background: url("images/tab_business_bg.jpg") no-repeat;
+            background-size: cover;
+        }
+
+        div.dot-nav-container {
+            position: fixed;
+            top: 50%;
+            right: 5%;
+        }
+
+        div.dot-nav-container ul,
+        div.dot-nav-container li {
+            display: block;
+        }
+
+        div.dot-nav-container a.dot-nav {
+            display: block;
+            width: 14px;
+            height: 14px;
+            margin-bottom: 12px;
+            background: url("images/m_dot_nav.png") no-repeat left top;
+        }
+
+        div.dot-nav-container a.selected,
+        div.dot-nav-container a.dot-nav:hover {
+            background-position: left bottom;
+        }
+
+    </style>
+</head>
+<body>
+<!-- 배경 -->
+<div class="img-container img1" id="img_1"></div>
+<div class="img-container img2" id="img_2"></div>
+<div class="img-container img1" id="img_3"></div>
+<div class="img-container img2" id="img_4"></div>
+<div class="img-container img1" id="img_5"></div>
+<!-- 우측 사이드 네비게이션 -->
+<div class="dot-nav-container">
+    <ul>
+        <li><a class="dot-nav selected" data-target="#img_1"></a></li>
+        <li><a class="dot-nav" data-target="#img_2"></a></li>
+        <li><a class="dot-nav" data-target="#img_3"></a></li>
+        <li><a class="dot-nav" data-target="#img_4"></a></li>
+        <li><a class="dot-nav" data-target="#img_5"></a></li>
+    </ul>
+</div>
+<script>
+  /**
+   * This is information of monitor width and height to be used for development
+   * width: 1280px
+   * height: 726px
+   **/
+
+  $(document).ready(function () {
+
+  });
+
+
+  (function addEventMovePageToClick() {
+    var prevCursor = '#img_1';
+    var curCursor = '#img_1';
+
+    // 사이드 네비게이션 클릭 리스너 등록
+    $('.dot-nav-container ul li a').on("click", function () {
+      const $this = $(this);
+      var dataTarget =  curCursor = $this.attr('data-target');
+      const scrollPosition = $(dataTarget).offset().top;
+
+      $('html,body').stop().animate({
+        scrollTop: scrollPosition
+      }, 500);
+
+      $this.addClass('selected');
+      if (prevCursor !== curCursor)
+        $('a[data-target="'+prevCursor+'"]').removeClass('selected');
+      prevCursor = dataTarget;
+    });
+
+  })();
+
+  /**
+   * @param {void}
+   * @return {void}
+   *
+   * Can use mousewheel to move content.
+   * FIXME: 마우스 휠이 동작하지 않음
+   * TODO: 마우스 휠 이벤트에 자세히 알아보고 스크롤 시, 이미지 offset을 구할 수 있어야 함.
+   */
+  function addEventMovePageToMouseWheel() {
+    // 개별적으로 Wheel 이벤트 적용
+    $('html, body').on("mousewheel DOMMouseScroll", function (e) {
+      var delta = 0;
+      if (!event) event = window.event;
+      if (event.wheelDelta) {
+        delta = event.wheelDelta / 120;
+        if (window.opera) delta = -delta;
+      } else if (event.detail) delta = -event.detail / 3;
+      var moveTop = null;
+      // 마우스휠을 위에서 아래로
+      if (delta < 0) {
+        if ($(this).next() != undefined) {
+          moveTop = $(this).next().offset().top;
+        }
+        // 마우스휠을 아래에서 위로
+      } else {
+        if ($(this).prev() != undefined) {
+          moveTop = $(this).prev().offset().top;
+        }
+      }
+      // 화면 이동 0.8초(800)
+      $("html,body").stop().animate({
+        scrollTop: moveTop + 'px'
+      }, {
+        duration: 800, complete: function () {
+        }
+      });
+    });
+  }
+</script>
+</body>
+</html>
