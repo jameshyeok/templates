@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        html,
+        body {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul {
+            list-style: none;
+            width: 100%;
+            height: 400%;
+        }
+
+        li {
+            width: 100%;
+            height: 100%;
+            list-style: none;
+        }
+
+        .container {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+
+        .test {
+            width: 100%;
+            height: 100%;
+            color: white;
+        }
+
+        .t1 {
+            background: #555555;
+        }
+
+        .t2 {
+            background: darkblue;
+        }
+
+        .t3 {
+            background: firebrick;
+        }
+
+        .t4 {
+            background: chartreuse;
+        }
+
+    </style>
+    <script src="../public/js/jquery-3.2.1.js"></script>
+    <script src="../public/js/jquery.mousewheel.js"></script>
+    <script>
+        $(function() {
+
+          window.moveTo = function(e) {
+            $('div.container ul').animate({
+              marginTop: -2904 * e
+            }, 1000);
+          }
+
+          $('body, html').mousewheel(function(event, delta) {
+            let upFlag = false;
+            let downFlag = false;
+            (function(){
+              // 스크롤 업
+              if (delta > 30) {
+                upFlag = true;
+              }
+              // 스크롤 다운
+              else if (delta < -30) {
+                downFlag = true;
+              }
+            })();
+
+            if(!!upFlag) {
+              upFlag = false;
+              console.log("scroll up");
+            }
+
+            if(!!downFlag) {
+              upFlag = false;
+              console.log("scroll down");
+            }
+
+            event.preventDefault();
+
+          });
+
+        });
+    </script>
+</head>
+<body>
+<div class="container">
+    <ul>
+        <li>
+            <div class="test t1">1</div>
+        </li>
+        <li>
+            <div class="test t2">2</div>
+        </li>
+        <li>
+            <div class="test t3">3</div>
+        </li>
+        <li>
+            <div class="test t4">4</div>
+        </li>
+    </ul>
+</div>
+</body>
+</html>
