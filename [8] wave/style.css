@@ -1,0 +1,193 @@
+/* CSS Reset */
+body,
+ul,
+h2,
+p,
+h3 {
+    margin: 0;
+    padding: 0;
+}
+
+li {
+    list-style-type: none;
+}
+
+/* a태그는 이미 색상이 있기 때문에 상속이 되지 않는다 */
+/*따라서 color 값을 inherit 해주는게 best이다.*/
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+/* Layouts */
+.l-wrapper {
+    width: 960px;
+    margin: 0 auto;
+    position: relative;
+}
+
+/*가변 레이아웃*/
+.l-sidebar {
+    float: right;
+    /*고정 값을 안넣어줘도 상관 없지만 안정적으로 잡을 수 있음*/
+    width: 200px;
+    margin-left: 30px;
+}
+
+/*고정 레이아웃*/
+.l-main {
+    overflow: hidden;
+}
+
+/* Utils */
+.l-wrapper:after,
+.u-clearfix:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+/* Module */
+.header {
+    /* 배경색 */
+    background-color: #0063A6;
+    /* 전경색 */
+    color: white;
+}
+
+.header-logo {
+    display: inline-block;
+    margin: 30px 0;
+}
+
+/* 메뉴바는 하위 메뉴가 나와야 되기 때문에 overflow hidden보단 clearfix가 낫다 */
+.header-menu {
+    background-color: #0090D2;
+    /*overflow: hidden;*/
+}
+
+.header-menu li {
+    float: left;
+}
+
+.header-menu li a {
+    padding: 20px;
+    display: block;
+}
+
+.header-menu li a:hover {
+    /*background-color: #33a6db;*/
+    background-color: rgba(0, 0, 0, 0.1);
+}
+
+.header-menu li a.is-active {
+    background-color: white;
+    color: black;
+}
+
+.header-cover {
+    position: absolute;
+    right: -50px;
+    bottom: 0px;
+}
+
+.contents {
+    background-color: #dddddd;
+    padding-bottom: 30px;
+}
+
+.contents-inner {
+    background-color: white;
+    padding: 30px;
+    overflow: hidden;
+}
+
+.fields h2 {
+    color: #0090D2;
+    margin-bottom: 30px;
+}
+
+.fields ul {
+    margin-left: 3px;
+}
+
+.fields ul li {
+    border-left: 5px solid #dddddd;
+    color: gray;
+    padding: 5px 10px;
+}
+
+.fields ul li:hover {
+    border-left: 5px solid #0090D2;
+    color: #0090D2;
+}
+
+.section {
+    border-bottom: 3px dotted #dddddd;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    overflow: hidden;
+}
+
+.section:last-child {
+    border-bottom: none;
+    padding: 0;
+    margin: 0;
+}
+
+.section-cover {
+    float: left;
+    margin-right: 30px;
+}
+
+.section h2 {
+    color: #0090D2;
+    margin-bottom: 10px;
+}
+
+.section p {
+    color: gray;
+}
+
+.footer {
+    background-color: #222222;
+    color: #999999;
+    padding: 30px 0;
+}
+
+.footer-logo {
+    float: left;
+}
+
+.footer-menu {
+    float: right;
+}
+
+.footer-menu-item {
+    float: left;
+    margin-left: 30px;
+}
+
+.footer-menu-item h3 {
+    color: #eee;
+    margin-bottom: 15px;
+    font-size: 14px;
+}
+
+.icons li {
+    display: inline-block;
+}
+
+.icons li a {
+    display: inline-block;
+    background-image: url("images/icon-sprite.png");
+    width: 30px;
+    height: 30px;
+    text-indent: -9999px;
+    font-size: 10px;
+}
+
+.icons li a.twitter { background-position: left top; }
+.icons li a.facebook { background-position: center top; }
+.icons li a.pinterest { background-position: right top; }
+.icons li a:hover { background-position-y: bottom; }
