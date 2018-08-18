@@ -1,0 +1,56 @@
+
+body {
+    background-color: #DDDDDD;
+}
+
+.wrapper {
+    /*background-color: white;*/
+    width: 960px;
+    /*height: 400px;*/
+    margin: 50px auto;
+    /*overflow: hidden;*/
+}
+
+.row {
+    margin: 0 -10px;
+}
+
+.col {
+    float: left;
+    width: 20%;
+    /*border-width: 0 10px;*/
+    /*border-style: solid;*/
+    /*border-color: red;*/
+    padding: 0 10px;
+    box-sizing: border-box;
+    /*background-color: antiquewhite;*/
+}
+
+/*5단 그리드에 1칸*/
+.col-1-5 {
+    width: 20%;
+}
+
+.col-2-5 {
+    width: 40%;
+}
+
+.col-3-5 {
+    width: 60%;
+}
+
+.col-4-5 {
+    width: 80%;
+}
+
+.col-5-5 {
+    width: 100%;
+}
+
+.box {
+    background-color: aquamarine;
+    height: 200px;
+    line-height: 200px;
+    text-align: center;
+}
+
